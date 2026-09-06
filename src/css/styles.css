@@ -1,8 +1,8 @@
 /**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
+================================
+| include css partials with
+| default @import url()
+================================
 */
 /* Common styles */
 @import url('./reset.css');
@@ -12,7 +12,215 @@
 
 /* Sections style */
 @import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
 @import url('./footer.css');
+
+/* ==== Наш застосунок (Pixabay Search) ==== */
+
+:root {
+  --color-accent: #4e75ff;
+  --color-accent-hover: #6c8cff;
+  --color-accent-pressed: #3d5fd8;
+  --color-text: #2e2f42;
+  --color-border-normal: #e4e4e9;
+  --color-border-hover: #808094;
+  --color-border-focus: var(--color-accent);
+
+  --content-max-width: 1128px;
+  --gallery-gap: 24px;
+  --card-width: 360px;
+  --card-image-height: 200px;
+
+  --form-width: 371px;
+  --form-height: 40px;
+  --header-padding-top: 36px;
+}
+
+.header {
+  padding: var(--header-padding-top) 16px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+  max-width: var(--form-width);
+  height: var(--form-height);
+  margin: 0 auto;
+}
+
+.search-form__input {
+  flex: 1 1 auto;
+  height: var(--form-height);
+  padding: 0 16px;
+  font-size: 14px;
+  color: var(--color-text);
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-normal);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.search-form__input:hover {
+  border-color: var(--color-border-hover);
+}
+
+.search-form__input:focus {
+  border-color: var(--color-border-focus);
+}
+
+.search-form__button {
+  flex: 0 0 auto;
+  height: var(--form-height);
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.search-form__button:hover,
+.search-form__button:focus-visible {
+  background-color: var(--color-accent-hover);
+}
+
+.search-form__button:active {
+  background-color: var(--color-accent-pressed);
+}
+
+main {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 16px 64px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, var(--card-width));
+  justify-content: center;
+  gap: var(--gallery-gap);
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.gallery-item {
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-normal);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gallery-link {
+  display: block;
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  height: var(--card-image-height);
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  border-top: 1px solid var(--color-border-normal);
+}
+
+.info-item {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+  border-right: 1px solid var(--color-border-normal);
+}
+
+.info-item:last-child {
+  border-right: none;
+}
+
+.info-item-title {
+  margin: 0 0 2px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.info-item p:last-child {
+  margin: 0;
+}
+
+.loader {
+  display: none;
+  width: 40px;
+  height: 40px;
+  margin: 24px auto 0;
+  border: 4px solid var(--color-border-normal);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loader.is-visible {
+  display: block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.load-more {
+  display: none;
+  margin: 0 auto;
+  padding: 10px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.load-more.is-visible {
+  display: block;
+}
+
+.load-more:hover,
+.load-more:focus {
+  background-color: var(--color-accent-hover);
+}
+
+@media screen and (max-width: 1160px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .search-form {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .search-form__input,
+  .search-form__button {
+    height: var(--form-height);
+  }
+}
